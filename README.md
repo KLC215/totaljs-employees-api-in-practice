@@ -1,6 +1,6 @@
 # Total.js Employees API in Practice
 
-Practicing Total.js 
+Practicing Total.js with sample employees database by MySQL.
 
 ## Installation
 
