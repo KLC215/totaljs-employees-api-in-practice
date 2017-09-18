@@ -1,0 +1,7 @@
+// Database settings
+db-connection: mysql
+db-host: localhost
+db-port: 3306
+db-database: employees
+db-username: root
+db-password: 

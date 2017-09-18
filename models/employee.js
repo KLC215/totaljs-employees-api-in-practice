@@ -23,6 +23,8 @@ NEWSCHEMA('Employee').make(schema => {
         const sql = DB();
         const { page, limit } = options;
 
+        sql.debug = true;
+
         sql.listing('employees', 'employees')
             .make(builder => {
                 builder.page(page, limit);
@@ -35,6 +37,8 @@ NEWSCHEMA('Employee').make(schema => {
         const sql = DB();
         const { emp_no } = options;
 
+        sql.debug = true;
+            
         sql.select('employee', 'employees')
             .make(builder => {
                 builder.where('emp_no', emp_no);
@@ -44,8 +48,10 @@ NEWSCHEMA('Employee').make(schema => {
         sql.exec(callback);
     });
 
-    schema.setSave(function (error, model, options, callback) {
+    schema.setSave((error, model, options, callback) => {
         const sql = DB();
+
+        sql.debug = true;
 
         if (!model.emp_no) {
             // First, get max number of emp_no
@@ -83,46 +89,14 @@ NEWSCHEMA('Employee').make(schema => {
         const sql = DB();
         const { emp_no } = options;
 
-        sql.remove('employee', 'employees').make(function (builder) {
+        sql.debug = true;
+
+        sql.remove('employee', 'employees').make(builder => {
             builder.where('emp_no', emp_no);
         });
 
         sql.validate('employee', 'notfound');
         sql.exec(SUCCESS(callback));
     });
-
+    
 });
-
-
-// exports.findAll = (page, limit, next) => {
-//     const sql = DB();
-
-//     sql.listing('employees', 'employees')
-//         .make(builder => {
-//             builder.page(page, limit);
-//         });
-//     sql.exec((err, response) => {
-//         if (err) throw err;
-//         next(response.employees);
-//     });
-
-// }
-
-// exports.findById = (id, next) => {
-//     const sql = DB();
-
-//     sql.select('employee', 'employees')
-//         .make(builder => {
-//             builder.where('emp_no', id);
-//             builder.first();
-//         });
-//     sql.exec((err, response) => {
-//         if(err) throw err;
-
-//         next(response.employee);
-//     });
-// }
-
-// exports.update = (employee, next) => {
-
-// }

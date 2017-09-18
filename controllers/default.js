@@ -3,8 +3,9 @@ exports.install = function () {
 }
 
 function index() {
-    var self = this;
-    var now = new Date();
+    // var self = this;
+    // var now = new Date();
 
-    self.json({ success: true, message: 'Success!', time: now });
+    // self.json({ success: true, message: 'Success!', time: now });
+    this.json(SUCCESS(true, { employees: [{ ss: "das" }] }));
 }
