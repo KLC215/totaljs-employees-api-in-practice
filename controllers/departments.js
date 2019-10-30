@@ -1,15 +1,15 @@
 exports.install = () => {
-    F.route('/api/v1/employees', index, ['*Employee']);
-    F.route('/api/v1/employees', store, ['post', 'put', '*Employee']);
-    F.route('/api/v1/employees/{id}', show, ['*Employee']);
-    F.route('/api/v1/employees/{id}', destroy, ['delete', '*Employee']);
+    F.route('/api/v1/departments', index, ['*Department']);
+    F.route('/api/v1/departments', store, ['post', 'put', '*Department']);
+    F.route('/api/v1/departments/{dept_no}', show, ['*Department']);
+    F.route('/api/v1/departments/{dept_no}', destroy, ['delete', '*Department']);
 }
 
 function index() {
     const { page, limit } = FUNCTION('getPaginater')(this.query);
-    
+
     this.$query({ page, limit }, (error, response) => {
-        if (error) this.throw500("Oops! Internal Error :\(");
+        if (error) this.throw500();
 
         const { count, items } = response;
         const pagination = new Pagination(count, page, limit);
@@ -20,42 +20,47 @@ function index() {
 
         this.json({
             pagination,
-            employees: items
+            departments: items
         });
     });
 }
 
 function store() {
     this.$save((err, response) => {
-        if (err) this.throw500();
-
+        // if (err) {
+        //     const errName = err.items.name;
+        //     const errMessage = err.items.error;
+        //     this.json(SUCCESS(false, {
+        //         error: errName,
+        //         message: errMessage
+        //     }));
+        // }
+        if(err) {
+            console.log(err);
+        }
+        
         const { success, error, value } = response;
 
         if (!success) {
             this.json(SUCCESS(false, { message: error.name }));
         }
         this.json(SUCCESS());
-
     });
 }
 
-function show(id) {
-    const emp_no = U.parseInt(id);
-
-    this.$get({ emp_no }, (error, response) => {
+function show(dept_no) {
+    this.$get({ dept_no }, (error, response) => {
         if (error) this.throw404();
 
-        const { employee } = response;
+        const { department } = response;
         const pagination = new Pagination(1, 1, 1);
 
-        this.json({ pagination, employee });
+        this.json({ pagination, department });
     });
 }
 
-function destroy(id) {
-    const emp_no = U.parseInt(id);
-
-    this.$remove({ emp_no }, (err, response) => {
+function destroy(dept_no) {
+    this.$remove({ dept_no }, (err, response) => {
         if (err) this.throw500();
 
         const { success, value, error } = response;

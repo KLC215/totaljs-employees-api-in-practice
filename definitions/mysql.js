@@ -1,9 +1,9 @@
-var mysql = require('sqlagent/mysql')
+const mysql = require('sqlagent/mysql')
     .connect({
-        host: 'localhost',
-        user: 'root',
-        password: 'root',
-        database: 'employees'
+        host: CONFIG('db-host'),
+        user: CONFIG('db-username'),
+        password: CONFIG('db-password'),
+        database: CONFIG('db-database')
     });
 
 F.database = mysql;
