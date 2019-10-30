@@ -65,9 +65,9 @@ string_decoder@~1.0.3:
   dependencies:
     safe-buffer "~5.1.0"
 
-total.js@^2.8.0:
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/total.js/-/total.js-2.8.0.tgz#8613b38269a9191b35a663b80f7f203379feecaa"
+total.js@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/total.js/-/total.js-3.3.0.tgz#30598116727491ac903d1f2edb1702ed5351cf87"
 
 util-deprecate@~1.0.1:
   version "1.0.2"
