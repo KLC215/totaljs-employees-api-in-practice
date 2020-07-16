@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lodash": "^4.17.13",
+    "lodash": "^4.17.19",
     "mysql": "^2.14.1",
     "sqlagent": "^9.9.5",
     "total.js": "^3.3.0"
